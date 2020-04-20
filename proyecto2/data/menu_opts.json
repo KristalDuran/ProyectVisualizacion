@@ -1,0 +1,15 @@
+{
+    "nombreApp" : "Componentes",
+    "rutas" : [
+        {
+            "ruta" : "alert",
+            "icon" : "accessibility",
+            "texto": "Discapacidad en Costa Rica 2010"
+        },
+        {
+            "ruta": "avatar",
+            "icon": "accessibility",
+            "texto": "Discapacidad en Costa Rica 2011"
+        }
+    ]
+}
