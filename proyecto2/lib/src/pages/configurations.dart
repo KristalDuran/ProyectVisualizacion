@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto2/src/pages/alert_page.dart';
+import 'package:proyecto2/src/pages/Menu.dart';
 
 class AvatarPage extends StatelessWidget {
 

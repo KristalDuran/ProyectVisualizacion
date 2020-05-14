@@ -2,14 +2,19 @@
     "nombreApp" : "Componentes",
     "rutas" : [
         {
-            "ruta" : "alert",
-            "icon" : "accessibility",
-            "texto": "Discapacidad en Costa Rica 2010"
+            "ruta" : "age",
+            "icon" : "age",
+            "texto": "Discapacidad por edad"
         },
         {
-            "ruta": "avatar",
-            "icon": "accessibility",
-            "texto": "Discapacidad en Costa Rica 2011"
+            "ruta": "gender",
+            "icon": "gender",
+            "texto": "Discapacidad por género"
+        },
+        {
+            "ruta": "location",
+            "icon": "location",
+            "texto": "Discapacidad por provincia"
         }
     ]
 }
