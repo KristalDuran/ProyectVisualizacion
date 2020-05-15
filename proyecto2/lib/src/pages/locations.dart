@@ -1,12 +1,12 @@
   import 'package:flutter/material.dart';
-import 'package:proyecto2/src/pages/configurations.dart';
+// import 'package:proyecto2/src/pages/configurations.dart';
 
-  class AlertPage extends StatefulWidget {
+  class Location extends StatefulWidget {
 
     var titule;
     var estado = false;
 
-    AlertPage(titule) {
+    Location(titule) {
       this.titule = titule;
     }
 
