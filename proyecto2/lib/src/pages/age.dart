@@ -40,7 +40,7 @@
 
     @override
     Widget build(BuildContext context) {
-      final List<ChartData> chartData = [
+       List<ChartData> chartData = [
             ChartData("0-14", 14471, 0.06, Color.fromRGBO(255, 100, 102, 1)),
             ChartData("15-29", 30661, 0.12 , Color.fromRGBO(0, 100, 102, 1)),
             ChartData("30-59", 117509, 0.47, Color.fromRGBO(255, 100, 19, 1)),
@@ -58,13 +58,10 @@
               delegate: SliverChildListDelegate([
                   SizedBox(height: 20.0,),
                   Center(child: Text('Gráfico de población con discapacidad para ver en Costa Rica clasificada por su edad'),),
-                  SizedBox(height: 50.0,),
-                  
-
+                  SizedBox(height: 50.0,),                
                   SfCartesianChart(
                     primaryXAxis: CategoryAxis(
                       title: AxisTitle(text: "Rango de edades"
-                      
                       )
                     ),
                     series: <ChartSeries<ChartData, String>>[
