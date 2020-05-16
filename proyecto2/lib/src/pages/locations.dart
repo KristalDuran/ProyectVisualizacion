@@ -3,11 +3,10 @@
 
   class Location extends StatefulWidget {
 
-    var titule;
+    var titule = 'Provincias';
     var estado = false;
 
     Location(titule) {
-      this.titule = titule;
     }
 
     @override
@@ -21,10 +20,13 @@
   class _ContadorPageState extends State {
 
     var titule;
-    var tipo = true;
-    var sexo = false;
-    var edad = false;
-    var provincia = false;
+    var arr = [{'provincia':'San José', 'state':true},
+    {'provincia':'Alajuela', 'state':true},
+    {'provincia':'Cartago', 'state':true},
+    {'provincia':'Heredia', 'state':true},
+    {'provincia':'Guanacaste', 'state':true},
+    {'provincia':'Puntarenas', 'state':true},
+    {'provincia':'Limón', 'state':true}];
     var menu = false;
     _ContadorPageState(titule){
       this.titule = titule;
@@ -33,7 +35,7 @@
     @override
     Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(titule),backgroundColor: Colors.deepPurpleAccent,
+      appBar: AppBar(title: Text(titule),backgroundColor: Colors.teal,
       ),
       body: ListView(
         children: <Widget>[
@@ -48,84 +50,37 @@
         height: 300.0,
         fit: BoxFit.cover,
         ),
-
-        SizedBox(height: 90.0,),
-        j(),
+        Column(
+          children: location(arr)
+        ),
 
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.deepPurpleAccent,
-        child: Icon(Icons.build, color: Colors.white,),
-        onPressed: () {
-          setState(() {
-            menu = !menu;
-          });
-          print(menu);
-//          final route = MaterialPageRoute(
-//              builder: (context) {
-//                return AvatarPage();
-//              }
-//          );
-//          Navigator.push(context, route);
-        },),
+      
     );}
 
-
-    Widget j() {
-      return
-        Column(
-          children: <Widget>[
-            Divider(),
-            CheckboxListTile(
-              title: Text("Tipo de discapacidad"),
-              checkColor: Colors.white,
-              activeColor: Colors.deepPurpleAccent,
-              value: tipo,
-              onChanged: (newValue) {
-                setState(() {
-                  tipo = newValue;
-                });
-              },
-              controlAffinity: ListTileControlAffinity.leading,),
-            Divider(),
-            CheckboxListTile(
-              title: Text("Sexo"),
-              value: sexo,
-              checkColor: Colors.white,
-              activeColor: Colors.deepPurpleAccent,
-              onChanged: (newValue) {
-                setState(() {
-                  sexo = newValue;
-                });
-              },
-              controlAffinity: ListTileControlAffinity.leading,),
-            Divider(),
-            CheckboxListTile(
-              title: Text("Edad"),
-              value: edad,
-              checkColor: Colors.white,
-              activeColor: Colors.deepPurpleAccent,
-              onChanged: (newValue) {
-                setState(() {
-                  edad = newValue;
-                });
-              },
-              controlAffinity: ListTileControlAffinity.leading,),
-            Divider(),
-            CheckboxListTile(
-              title: Text("Provincia"),
-              value: provincia,
-              checkColor: Colors.white,
-              activeColor: Colors.deepPurpleAccent,
-              onChanged: (newValue) {
-                setState(() {
-                  provincia = newValue;
-                });
-              },
-              controlAffinity: ListTileControlAffinity.leading,),
-            Divider(),
-          ]
-        );
+    List<Widget> location(array) {
+    var edadesWidget = <Widget>[];
+    edadesWidget.add(SizedBox(height: 25.0,));
+    edadesWidget.add(Text('Seleccione las provincias', style: TextStyle(fontWeight: FontWeight.bold)));
+    edadesWidget.add(SizedBox(height: 15.0,));
+    for (var edad in array) {
+      edadesWidget.add(Divider());
+      edadesWidget.add(
+        CheckboxListTile(
+          title: Text(edad['provincia']),
+          checkColor: Colors.white,
+          activeColor: Colors.teal,
+          value: edad['state'],
+          onChanged: (newValue) {
+            edad['state'] = newValue;
+            setState(() {
+              arr = array;
+            });
+          }
+        )
+      );
     }
+    return edadesWidget;
+  }
   }

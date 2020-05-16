@@ -2,19 +2,19 @@
     "nombreApp" : "Componentes",
     "rutas" : [
         {
-            "ruta" : "age",
+            "route" : "age",
             "icon" : "age",
-            "texto": "Discapacidad por edad"
+            "texto": "Clasificación por edad"
         },
         {
-            "ruta": "gender",
+            "route": "gender",
             "icon": "gender",
-            "texto": "Discapacidad por género"
+            "texto": "Clasificación por género"
         },
         {
-            "ruta": "location",
+            "route": "location",
             "icon": "location",
-            "texto": "Discapacidad por provincia"
+            "texto": "Clasificación por provincia"
         }
     ]
 }
