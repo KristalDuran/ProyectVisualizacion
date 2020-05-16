@@ -1,4 +1,5 @@
   import 'package:flutter/material.dart';
+  import 'package:syncfusion_flutter_charts/charts.dart';
 // import 'package:proyecto2/src/pages/configurations.dart';
 
   class Gender extends StatefulWidget {
@@ -29,6 +30,12 @@
 
     @override
     Widget build(BuildContext context) {
+      List<ChartData> chartData = [
+            ChartData("Para hablar", 16595,),
+            ChartData("Para caminar o subir gradas", 64271,),
+            ChartData("Para utilizar brazos o manos", 23001,),
+            ChartData("Del tipo intelectual", 19968,)
+        ];
       return Scaffold(
         appBar: AppBar(title: Text(titule),backgroundColor: Colors.deepPurpleAccent,),
         body: ListView(
@@ -37,13 +44,20 @@
           Center(child: Text('Gráfico de población discapacitada en Costa Rica'),),
           SizedBox(height: 50.0,),
           //esto se debe sustituir por el gráfico
-          FadeInImage(
-          image: NetworkImage('https://images.theconversation.com/files/125391/original/image-20160606-13080-s7o3qu.jpg?ixlib=rb-1.1.0&rect=273%2C0%2C2639%2C1379&q=45&auto=format&w=926&fit=clip'),
-          placeholder: AssetImage('assets/original.gif'),
-          fadeInDuration: Duration( milliseconds: 200 ),
-          height: 300.0,
-          fit: BoxFit.cover,
-          ),
+          SfCartesianChart(
+                    primaryXAxis: CategoryAxis(
+                      title: AxisTitle(text: "Discapacidad por género"
+                      )
+                    ),
+                    series: <ChartSeries<ChartData, String>>[
+                      // Renders bubble chart
+                      BarSeries<ChartData, String>(
+                          dataSource: chartData,
+                          xValueMapper: (ChartData age, _) => age.x,
+                          yValueMapper: (ChartData age, _) => age.y
+                      )
+                    ]
+                  ),
 
           SizedBox(height: 90.0,),
           j(),
@@ -61,4 +75,9 @@
           ]
         );
     }
+  }
+  class ChartData {
+        ChartData(this.x, this.y);
+            final String x;
+            final double y;
   }
