@@ -20,7 +20,7 @@
 
   class _ContadorPageState extends State {
 
-    var titule;
+    var titule = 'Edades';
     var tipo = true;
     var sexo = false;
     var edad = false;
@@ -34,7 +34,6 @@
         {'edad':'De 90 años y más', 'state':true}];
     var menu = false;
     _ContadorPageState(titule){
-      this.titule = titule;
     }
 
     @override
@@ -94,6 +93,7 @@
         )
       );
     }
+    print(arr);
     return edadesWidget;
   }
 
