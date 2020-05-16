@@ -1,4 +1,5 @@
   import 'package:flutter/material.dart';
+  import 'package:syncfusion_flutter_charts/charts.dart';
 // import 'package:proyecto2/src/pages/configurations.dart';
 
   class Age extends StatefulWidget {
@@ -38,6 +39,15 @@
 
     @override
     Widget build(BuildContext context) {
+       List<ChartData> chartData = [
+            ChartData("0-14", 14471, 0.06, Color.fromRGBO(255, 100, 102, 1)),
+            ChartData("15-29", 30661, 0.12 , Color.fromRGBO(0, 100, 102, 1)),
+            ChartData("30-59", 117509, 0.47, Color.fromRGBO(255, 100, 19, 1)),
+            ChartData("60-64", 22374, 0.09, Color.fromRGBO(157, 21, 21, 1)),
+            ChartData("65-74", 34089, 0.14, Color.fromRGBO(0, 211, 0, 1)),
+            ChartData("75-89", 28368, 0.11, Color.fromRGBO(23, 23, 200, 1)),
+            ChartData("90+", 3992, 0.02, Color.fromRGBO(230, 230, 0, 1))
+        ];
     return Scaffold(
       appBar: AppBar(title: Text(titule),backgroundColor: Colors.teal),
       body: Container(
@@ -47,18 +57,23 @@
               delegate: SliverChildListDelegate([
                   SizedBox(height: 20.0,),
                   Center(child: Text('Gráfico de población con discapacidad para ver en Costa Rica clasificada por su edad'),),
-                  SizedBox(height: 50.0,),
-                  
-
-                  FadeInImage(
-                  image: NetworkImage('https://images.theconversation.com/files/125391/original/image-20160606-13080-s7o3qu.jpg?ixlib=rb-1.1.0&rect=273%2C0%2C2639%2C1379&q=45&auto=format&w=926&fit=clip'),
-                  placeholder: AssetImage('assets/original.gif'),
-                  fadeInDuration: Duration( milliseconds: 200 ),
-                  height: 300.0,
-                  fit: BoxFit.cover,
-                  ), 
-                  //aca va el grafico
-
+                  SizedBox(height: 50.0,),                
+                  SfCartesianChart(
+                    primaryXAxis: CategoryAxis(
+                      title: AxisTitle(text: "Rango de edades"
+                      )
+                    ),
+                    series: <ChartSeries<ChartData, String>>[
+                      // Renders bubble chart
+                      BubbleSeries<ChartData, String>(
+                          dataSource: chartData,
+                          sizeValueMapper: (ChartData age, _) => age.size,
+                          pointColorMapper:(ChartData sales, _) => sales.pointColor,
+                          xValueMapper: (ChartData age, _) => age.x,
+                          yValueMapper: (ChartData age, _) => age.y
+                      )
+                    ]
+                  ),
 
                   Column(
                     children: edades(arr),
@@ -70,6 +85,7 @@
       ),
     );
   }
+  
 
   List<Widget> edades(array) {
     var edadesWidget = <Widget>[];
@@ -96,5 +112,14 @@
     print(arr);
     return edadesWidget;
   }
+  
 
   }
+  class ChartData {
+        ChartData(this.x, this.y, this.size, this.pointColor);
+            final String x;
+            final double y;
+            final double size;
+            final Color pointColor;
+  }
+
