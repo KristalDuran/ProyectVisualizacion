@@ -26,20 +26,14 @@
     var sexo = false;
     var edad = false;
     var provincia = false;
-    var arr = [{'edad':'De 0 a 14 años', 'state':true},
-        {'edad':'De 15 a 29 años', 'state':true},
-        {'edad':'De 30 a 59 años', 'state':true},
-        {'edad':'De 60 a 64 años', 'state':true},
-        {'edad':'De 65 a 74 años', 'state':true},
-        {'edad':'De 75 a 89 años', 'state':true},
-        {'edad':'De 90 años y más', 'state':true}];
-    var menu = false;
-    _ContadorPageState(titule){
-    }
-
-    @override
-    Widget build(BuildContext context) {
-       List<ChartData> chartData = [
+    var arr = [{'edad':'De 0 a 14 años', 'state':true, 'rango':'0-14', 'total':14471.0, 'porcentaje':0.06, 'color':Color.fromRGBO(255, 100, 102, 1)},
+        {'edad':'De 15 a 29 años', 'state':true, 'rango':'15-29', 'total':30661.0, 'porcentaje':0.12, 'color':Color.fromRGBO(0, 100, 102, 1)},
+        {'edad':'De 30 a 59 años', 'state':true, 'rango':'30-59', 'total':117509.0, 'porcentaje':0.47, 'color':Color.fromRGBO(255, 100, 19, 1)},
+        {'edad':'De 60 a 64 años', 'state':true, 'rango':'60-64', 'total':22374.0, 'porcentaje':0.09, 'color':Color.fromRGBO(157, 21, 21, 1)},
+        {'edad':'De 65 a 74 años', 'state':true, 'rango':'65-74', 'total':34089.0, 'porcentaje':0.14, 'color':Color.fromRGBO(0, 211, 0, 1)},
+        {'edad':'De 75 a 89 años', 'state':true, 'rango':'75-89', 'total':28368.0, 'porcentaje':0.11, 'color':Color.fromRGBO(23, 23, 200, 1)},
+        {'edad':'De 90 años y más', 'state':true, 'rango':'90+', 'total':3992.0, 'porcentaje':0.02, 'color':Color.fromRGBO(230, 230, 0, 1)}];
+    List<ChartData> chartData = [
             ChartData("0-14", 14471, 0.06, Color.fromRGBO(255, 100, 102, 1)),
             ChartData("15-29", 30661, 0.12 , Color.fromRGBO(0, 100, 102, 1)),
             ChartData("30-59", 117509, 0.47, Color.fromRGBO(255, 100, 19, 1)),
@@ -48,6 +42,12 @@
             ChartData("75-89", 28368, 0.11, Color.fromRGBO(23, 23, 200, 1)),
             ChartData("90+", 3992, 0.02, Color.fromRGBO(230, 230, 0, 1))
         ];
+    var menu = false;
+    _ContadorPageState(titule){
+    }
+
+    @override
+    Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(titule),backgroundColor: Colors.teal),
       body: Container(
@@ -104,6 +104,7 @@
             edad['state'] = newValue;
             setState(() {
               arr = array;
+              setAnos();
             });
           }
         )
@@ -113,6 +114,20 @@
     return edadesWidget;
   }
   
+  void setAnos(){
+    List<ChartData> chartDataNew = [];
+    for (var edad in arr) {
+      if (edad['state']) {
+        print(edad);
+        ChartData chart = ChartData(edad['rango'], edad['total'], edad['porcentaje'], edad['color']);
+        chartDataNew.add(chart);
+      }
+    }
+    print(chartDataNew);
+    setState(() {
+      chartData = chartDataNew;
+    });
+  }
 
   }
   class ChartData {

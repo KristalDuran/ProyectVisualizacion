@@ -21,21 +21,14 @@
   class _ContadorPageState extends State {
 
     var titule;
-    var arr = [{'provincia':'San José', 'state':true},
-    {'provincia':'Alajuela', 'state':true},
-    {'provincia':'Cartago', 'state':true},
-    {'provincia':'Heredia', 'state':true},
-    {'provincia':'Guanacaste', 'state':true},
-    {'provincia':'Puntarenas', 'state':true},
-    {'provincia':'Limón', 'state':true}];
-    var menu = false;
-    _ContadorPageState(titule){
-      this.titule = titule;
-    }
-
-    @override
-    Widget build(BuildContext context) {
-      List<ChartData> chartData = [
+    var arr = [{'provincia':'San José', 'state':true, 'name':'SJ', 'total':23782.0},
+    {'provincia':'Alajuela', 'state':true, 'name':'AL', 'total':14081.0},
+    {'provincia':'Cartago', 'state':true, 'name':'CA', 'total':7074.0},
+    {'provincia':'Heredia', 'state':true, 'name':'HE', 'total':6113.0},
+    {'provincia':'Guanacaste', 'state':true, 'name':'GU', 'total':5722.0},
+    {'provincia':'Puntarenas', 'state':true, 'name':'PU', 'total':7564.0},
+    {'provincia':'Limón', 'state':true, 'name':'LI', 'total':6373.0}];
+    List<ChartData> chartData = [
             ChartData("SJ", 23782),
             ChartData("AL", 14081),
             ChartData("CA", 7074),
@@ -44,6 +37,14 @@
             ChartData("PU", 7564),
             ChartData("LI", 6373)
         ];
+    var menu = false;
+    _ContadorPageState(titule){
+      this.titule = titule;
+    }
+
+    @override
+    Widget build(BuildContext context) {
+      
     return Scaffold(
       appBar: AppBar(title: Text(titule),backgroundColor: Colors.teal,
       ),
@@ -93,12 +94,28 @@
             edad['state'] = newValue;
             setState(() {
               arr = array;
+              setAno();
             });
           }
         )
       );
     }
     return edadesWidget;
+  }
+
+  void setAno(){
+    List<ChartData> chartDataNew = [];
+    for (var edad in arr) {
+      if (edad['state']) {
+        print(edad);
+        ChartData chart = ChartData(edad['name'], edad['total']);
+        chartDataNew.add(chart);
+      }
+    }
+    print(chartDataNew);
+    setState(() {
+      chartData = chartDataNew;
+    });
   }
   }
   class ChartData {
