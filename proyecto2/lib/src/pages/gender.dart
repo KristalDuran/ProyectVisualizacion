@@ -30,29 +30,51 @@
     @override
     Widget build(BuildContext context) {
       List<ChartData> chartData = [
-            ChartData("Para hablar", 16595,),
-            ChartData("Para caminar o subir gradas", 64271,),
-            ChartData("Para utilizar brazos o manos", 23001,),
-            ChartData("Del tipo intelectual", 19968,)
+            ChartData("Hablar", 16595,12812),
+            ChartData("Caminar o subir gradas", 64271, 76109),
+            ChartData("Utilizar brazos o manos", 23001, 25858),
+            ChartData("Intelectual", 19968, 15448)
         ];
       return Scaffold(
         appBar: AppBar(title: Text(titule),backgroundColor: Colors.teal,),
         body: ListView(
-          children: <Widget>[
-          SizedBox(height: 20.0,),
-          Center(child: Text('Gráfico de población discapacitada en Costa Rica'),),
-          SizedBox(height: 50.0,),
-          //esto se debe sustituir por el gráfico
-          FadeInImage(
-          image: NetworkImage('https://images.theconversation.com/files/125391/original/image-20160606-13080-s7o3qu.jpg?ixlib=rb-1.1.0&rect=273%2C0%2C2639%2C1379&q=45&auto=format&w=926&fit=clip'),
-          placeholder: AssetImage('assets/original.gif'),
-          fadeInDuration: Duration( milliseconds: 200 ),
-          height: 300.0,
-          fit: BoxFit.cover,
-          ),
-          
-          column(),
-          ],
+        children: <Widget>[
+        SizedBox(height: 20.0,),
+        Center(child: Text('Gráfico de población discapacitada en Costa Rica'),),
+        SizedBox(height: 50.0,),
+        //esto se debe sustituir por el gráfico
+        SfCartesianChart(
+              primaryXAxis: CategoryAxis(
+                title: AxisTitle(text: "Tipo discapacidad"
+                )
+              ),
+              series: <ChartSeries<ChartData, String>>[
+                // Renders bubble chart
+                BarSeries<ChartData, String>(
+                  isVisible: man,
+                    dataSource: chartData,
+                    xValueMapper: (ChartData age, _) => age.x,
+                    yValueMapper: (ChartData age, _) => age.y,
+                    legendItemText: "Hombres"
+                ),
+                BarSeries<ChartData, String>(
+                  isVisible: woman,
+                    dataSource: chartData,
+                    xValueMapper: (ChartData age, _) => age.x,
+                    yValueMapper: (ChartData age, _) => age.y2,
+                    legendItemText: "Mujeres"
+                )
+              ],
+            legend: Legend(
+              isVisible: true,
+              // Toogless the series visibility on tapping the legend item
+              toggleSeriesVisibility: true,
+              position: LegendPosition.bottom
+            )
+        ),
+        
+        column(),
+        ],
         )
       );
     }
@@ -93,7 +115,8 @@
     }
   }
   class ChartData {
-        ChartData(this.x, this.y);
+        ChartData(this.x, this.y, this.y2);
             final String x;
             final double y;
+            final double y2;
   }
