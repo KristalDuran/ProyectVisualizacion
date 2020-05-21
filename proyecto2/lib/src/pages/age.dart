@@ -65,9 +65,9 @@
                     ),
                     series: <ChartSeries<ChartData, String>>[
                       // Renders bubble chart
-                      BubbleSeries<ChartData, String>(
+                      ColumnSeries<ChartData, String>(
                           dataSource: chartData,
-                          sizeValueMapper: (ChartData age, _) => age.size,
+                          //sizeValueMapper: (ChartData age, _) => age.size,
                           pointColorMapper:(ChartData age, _) => age.pointColor,
                           xValueMapper: (ChartData age, _) => age.x,
                           yValueMapper: (ChartData age, _) => age.y
